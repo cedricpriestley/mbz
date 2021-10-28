@@ -1,0 +1,5 @@
+mbz_migrate-library:
+  js:
+    js/importScript.js: {}
+  dependencies:
+    - core/drupal.ajax

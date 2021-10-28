@@ -1,0 +1,13 @@
+{
+    "name": "mbz_migrate",
+    "type": "drupal-module",
+    "description": "A module to migrate MusicBrainz content to Drupal",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/mbz_migrate",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/mbz_migrate",
+        "source": "http://cgit.drupalcode.org/mbz_migrate"
+    }
+}

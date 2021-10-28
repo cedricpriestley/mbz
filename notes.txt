@@ -1,0 +1,32 @@
+--artist--
+http://musicbrainz.org/ws/2/artist/f27ec8db-af05-4f36-916e-3d57f91ecf5e?inc=aliases+tags+artist-rels+label-rels+url-rels+tags&fmt=json
+
+--artist release groups--
+http://musicbrainz.org/ws/2/release-group?artist=f27ec8db-af05-4f36-916e-3d57f91ecf5e&type=album&limit=100&offset=0&fmt=json
+
+--release group--
+http://musicbrainz.org/ws/2/release-group/01a42a27-50e1-40e1-93d5-24a54b1595d0?inc=artist-credits+releases+release-group-rels&fmt=json
+
+--release--
+http://musicbrainz.org/ws/2/release/031c1f26-ab8b-488c-b793-e34a9340d245?inc=artist-credits+labels+recordings+isrcs+discids+media+release-rels&fmt=json
+
+--recording--
+http://musicbrainz.org/ws/2/recording/2460a241-6ff4-49f1-80f9-36051534e9ae?inc=isrcs+recording-rels&fmt=json
+c
+--label--
+http://musicbrainz.org/ws/2/label/8f638ddb-131a-4cc3-b3d4-7ebdac201b55?inc=label-rels&fmt=json
+
+$theme_name = \Drupal::config('system.theme')->get('default');
+$system_region = system_region_list($theme_name, $show = REGIONS_ALL);
+$region_list =  json_decode(json_encode($system_region),true);
+print_r($region_list);
+
+$base_fields = \Drupal::service('entity_field.manager')->getBaseFieldDefinitions('artist');
+print_r($base_fields);
+
+
+
+$allowed_values = \Drupal::service('entity_field.manager')
+   ->getBaseFieldDefinitions('artist')['gender']
+   ->getSetting('allowed_values');
+print_r($allowed_values);

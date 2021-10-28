@@ -1,0 +1,174 @@
+music.entities:
+  path: '/admin/structure/music'
+  defaults:
+    _controller: '\Drupal\mbz_migrate\Controller\Music::index'
+    _title: 'Music Entities'
+  requirements:
+    _permission: 'access content'
+
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
+entity.artist.canonical:
+  path: '/mbz/artist/{artist}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the artist entity
+    _entity_view: 'artist'
+    _title: 'Artist Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'artist.view'
+
+entity.artist.collection:
+  path: '/mbz/artist/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the artist entity.
+    _entity_list: 'artist'
+    _title: 'Artist List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'administer artist entity'
+
+entity.artist.add:
+  path: '/mbz/artist/add'
+  defaults:
+  # Calls the form.add controller, defined in the artist entity.
+    _entity_form: artist.add
+    _title: 'Add Artist'
+  requirements:
+    _entity_create_access: 'artist'
+
+entity.artist.edit:
+  path: '/mbz/artist/{artist}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the artist entity.
+    _entity_form: artist.edit
+    _title: 'Edit Artist'
+  requirements:
+    _entity_access: 'artist.edit'
+
+entity.artist.delete:
+  path: '/mbz/artist/{artist}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the artist entity.
+    _entity_form: artist.delete
+    _title: 'Delete Artist'
+  requirements:
+    _entity_access: 'artist.delete'
+
+entity.artist.settings:
+  path: 'admin/structure/artist/settings'
+  defaults:
+    _form: '\Drupal\mbz_migrate\Form\ArtistSettingsForm'
+    _title: 'Artist Settings'
+  requirements:
+    _permission: 'administer artist entity'
+
+entity.artist.import:
+  path: '/mbz/artist/import'
+  defaults:
+    _controller: '\Drupal\mbz_migrate\Controller\ArtistImport::index'
+    _title: 'Import Artist(s)'
+  requirements:
+    _permission: 'import artist entity'
+
+entity.artist.search_ajax.name:
+  path: '/mbz/artist/search-ajax/name'
+  defaults:
+    _controller: '\Drupal\mbz_migrate\Controller\ArtistAjaxSearch::name'
+    _format: json
+  requirements:
+    _permission: 'import artist entity'
+
+entity.artist_type.canonical:
+  path: '/mbz/artist-type/{artist_type}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the artist_type entity
+    _entity_view: 'artist_type'
+    _title: 'Artist Type Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'artist_type.view'
+
+entity.artist_type.collection:
+  path: '/mbz/artist-type/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the artist_type entity.
+    _entity_list: 'artist_type'
+    _title: 'Artist Type List' 
+  requirements:
+  # Checks for permission directly.
+    _permission: 'administer artist_type entity'
+
+entity.artist_type.add:
+  path: '/mbz/artist-type/add'
+  defaults:
+  # Calls the form.add controller, defined in the artist_type entity.
+    _entity_form: artist_type.add
+    _title: 'Add Artist Type'
+  requirements:
+    _entity_create_access: 'artist_type'
+
+entity.artist_type.edit_form:
+  path: '/mbz/artist-type/{artist_type}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the artist_type entity.
+    _entity_form: artist_type.edit
+    _title: 'Edit Artist Type'
+  requirements:
+    _entity_access: 'artist_type.edit'
+
+entity.artist_type.delete_form:
+  path: '/mbz/artist_type/{artist_type}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the artist_type entity.
+    _entity_form: artist_type.delete
+    _title: 'Delete Artist Type'
+  requirements:
+    _entity_access: 'artist_type.delete'
+
+entity.gender.canonical:
+  path: '/mbz/gender/{gender}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the gender entity
+    _entity_view: 'gender'
+    _title: 'Gender Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'gender.view'
+
+entity.gender.collection:
+  path: '/mbz/gender/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the gender entity.
+    _entity_list: 'gender'
+    _title: 'Gender List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'administer gender entity'
+
+entity.gender.add:
+  path: '/mbz/gender/add'
+  defaults:
+  # Calls the form.add controller, defined in the gender entity.
+    _entity_form: gender.add
+    _title: 'Add Gender'
+  requirements:
+    _entity_create_access: 'gender'
+
+entity.gender.edit_form:
+  path: '/mbz/gender/{gender}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the gender entity.
+    _entity_form: gender.edit
+    _title: 'Edit Gender'
+  requirements:
+    _entity_access: 'gender.edit'
+
+entity.gender.delete_form:
+  path: '/mbz/gender/{gender}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the gender entity.
+    _entity_form: gender.delete
+    _title: 'Delete Gender'
+  requirements:
+    _entity_access: 'gender.delete'

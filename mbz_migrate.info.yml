@@ -1,0 +1,5 @@
+name: 'MusicBrainz: Migrate'
+type: module
+description: 'A module to migrate MusicBrainz content to Drupal'
+core_version_requirement: ^9
+package: MusicBrainz

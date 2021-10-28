@@ -1,0 +1,46 @@
+# Music menu items definition
+music.admin:
+  title: 'Music'
+  route_name: music.entities
+  description: 'List of music-related content'
+  parent: system.admin_structure
+  weight: 100
+
+# Import menu item
+entity.artist.import:
+  title: 'Import Artists'
+  route_name: entity.artist.import
+  description: 'List artist entities'
+  parent: music.admin
+  weight: 100
+
+# Artist menu items definition
+entity.artist.collection:
+  title: 'Artists'
+  route_name: entity.artist.collection
+  description: 'List artist entities'
+  parent: music.admin
+  weight: 100
+
+# artist.admin.structure.settings:
+#   title: 'Artist Settings'
+#   description: 'Configure artist entities'
+#   route_name: artist.settings
+#   parent: music.admin
+#   weight: 100
+
+# ArtistType menu items definition
+entity.artist_type.collection:
+  title: 'Artist Types'
+  route_name: entity.artist_type.collection
+  description: 'List artist type entities'
+  parent: music.admin
+  weight: 100
+
+# Gender menu items definition
+entity.gender.collection:
+  title: 'Gender'
+  route_name: entity.gender.collection
+  description: 'List gender entities'
+  parent: music.admin
+  weight: 100

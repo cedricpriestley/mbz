@@ -1,0 +1,6 @@
+#!/bin/bash
+drush sql-query "DELETE FROM gender"
+drush sql-query "DELETE FROM artist_type"
+drush sql-query "DELETE FROM artist"
+drush pm-uninstall mbz_migrate
+drush pm-enable mbz_migrate

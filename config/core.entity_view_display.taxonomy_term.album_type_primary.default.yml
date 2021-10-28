@@ -1,0 +1,30 @@
+uuid: eb1a4550-77ec-4eac-b6b1-77ec9da02371
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.album_type_primary.field_album_type_primary_mbid
+    - taxonomy.vocabulary.album_type_primary
+  module:
+    - text
+id: taxonomy_term.album_type_primary.default
+targetEntityType: taxonomy_term
+bundle: album_type_primary
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_album_type_primary_mbid:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

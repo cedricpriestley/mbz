@@ -1,0 +1,59 @@
+# Define the 'local' links for the module
+
+artist.settings_tab:
+  route_name: artist.settings
+  title: Settings
+  base_route: artist.settings
+
+entity.artist.canonical:
+  route_name: entity.artist.canonical
+  base_route: entity.artist.canonical
+  title: 'View'
+
+entity.artist.edit:
+  route_name: entity.artist.edit
+  base_route: entity.artist.canonical
+  title: 'Edit'
+
+entity.artist.version_history:
+  route_name: entity.artist.version_history
+  base_route: entity.artist.canonical
+  title: 'Revisions'
+
+entity.artist.delete:
+  route_name:  entity.artist.delete
+  base_route:  entity.artist.canonical
+  title: Delete
+  weight: 10
+
+entity.gender.canonical:
+  route_name: entity.gender.canonical
+  base_route: entity.gender.canonical
+  title: 'View'
+
+entity.gender.edit:
+  route_name: entity.gender.edit
+  base_route: entity.gender.canonical
+  title: 'Edit'
+
+entity.gender.delete:
+  route_name: entity.gender.delete
+  base_route: entity.gender.canonical
+  title: Delete
+  weight: 10
+
+entity.artist_type.canonical:
+  route_name: entity.artist_type.canonical
+  base_route: entity.artist_type.canonical
+  title: 'View'
+
+entity.artist_type.edit:
+  route_name: entity.artist_type.edit
+  base_route: entity.artist_type.canonical
+  title: 'Edit'
+
+entity.artist_type.delete:
+  route_name: entity.artist_type.delet
+  base_route: entity.artist_type.canonical
+  title: Delete
+  weight: 10

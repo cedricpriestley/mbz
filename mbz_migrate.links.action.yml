@@ -1,0 +1,31 @@
+# All action links for this module
+
+entity.artist.add:
+  # Which route will be called by the link
+  route_name: entity.artist.add
+  title: 'Add Artist'
+
+  # Where will the link appear, defined by route name.
+  appears_on:
+    - entity.artist.collection
+    - entity.mbz_migrate.canonical
+
+entity.artist_type.add:
+  # Which route will be called by the link
+  route_name: entity.artist_type.add
+  title: 'Add ArtistType'
+
+  # Where will the link appear, defined by route name.
+  appears_on:
+    - entity.artist_type.collection
+    - entity.mbz_migrate.canonical
+
+entity.gender.add:
+  # Which route will be called by the link
+  route_name: entity.gender.add
+  title: 'Add Gender'
+
+  # Where will the link appear, defined by route name.
+  appears_on:
+    - entity.gender.collection
+    - entity.mbz_migrate.canonical

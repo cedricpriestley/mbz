@@ -1,0 +1,19 @@
+uuid: 2001a3db-725c-4efe-b86e-569e520b3c44
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_album_type_primary_mbid
+    - taxonomy.vocabulary.album_type_primary
+id: taxonomy_term.album_type_primary.field_album_type_primary_mbid
+field_name: field_album_type_primary_mbid
+entity_type: taxonomy_term
+bundle: album_type_primary
+label: 'Album Type Primary  MBID'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

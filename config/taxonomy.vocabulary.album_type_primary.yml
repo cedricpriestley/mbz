@@ -1,0 +1,8 @@
+uuid: 1e706816-42f8-4fde-a1e5-fb885f28a9fc
+langcode: en
+status: true
+dependencies: {  }
+name: 'Album Type Primary'
+vid: album_type_primary
+description: 'A taxonomy representing MusicBrainz primary album types'
+weight: 0

@@ -1,0 +1,92 @@
+add artist entities:
+  title: 'Create new Artist entities'
+
+administer artist entities:
+  title: 'Administer Artist entities'
+  description: 'Allow to access the administration form to configure Artist entities.'
+  restrict access: true
+
+delete artist entities:
+  title: 'Delete Artist entities'
+
+edit artist entities:
+  title: 'Edit Artist entities'
+
+view published artist entities:
+  title: 'View published Artist entities'
+
+view unpublished artist entities:
+  title: 'View unpublished Artist entities'
+
+view all artist revisions:
+  title: 'View all Artist revisions'
+
+revert all artist revisions:
+  title: 'Revert all Artist revisions'
+  description: 'Role requires permission <em>view Artist revisions</em> and <em>edit rights</em> for artist entities in question or <em>administer artist entities</em>.'
+
+delete all artist revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Artist revisions</em> and <em>delete rights</em> for artist entities in question or <em>administer artist entities</em>.'
+
+add gender entities:
+  title: 'Create new Gender entities'
+
+administer gender entities:
+  title: 'Administer Gender entities'
+  description: 'Allow to access the administration form to configure Gender entities.'
+  restrict access: true
+
+delete gender entities:
+  title: 'Delete Gender entities'
+
+edit gender entities:
+  title: 'Edit Gender entities'
+
+view published gender entities:
+  title: 'View published Gender entities'
+
+view unpublished gender entities:
+  title: 'View unpublished Gender entities'
+
+view all gender revisions:
+  title: 'View all Gender revisions'
+
+revert all gender revisions:
+  title: 'Revert all Gender revisions'
+  description: 'Role requires permission <em>view Gender revisions</em> and <em>edit rights</em> for gender entities in question or <em>administer gender entities</em>.'
+
+delete all gender revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Gender revisions</em> and <em>delete rights</em> for gender entities in question or <em>administer gender entities</em>.'
+
+add artist_type entities:
+  title: 'Create new ArtistType entities'
+
+administer artist_type entities:
+  title: 'Administer ArtistType entities'
+  description: 'Allow to access the administration form to configure ArtistType entities.'
+  restrict access: true
+
+delete artist_type entities:
+  title: 'Delete ArtistType entities'
+
+edit artist_type entities:
+  title: 'Edit ArtistType entities'
+
+view published artist_type entities:
+  title: 'View published ArtistType entities'
+
+view unpublished artist_type entities:
+  title: 'View unpublished ArtistType entities'
+
+view all artist_type revisions:
+  title: 'View all ArtistType revisions'
+
+revert all artist_type revisions:
+  title: 'Revert all ArtistType revisions'
+  description: 'Role requires permission <em>view ArtistType revisions</em> and <em>edit rights</em> for artist_type entities in question or <em>administer artist_type entities</em>.'
+
+delete all artist_type revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view ArtistType revisions</em> and <em>delete rights</em> for artist_type entities in question or <em>administer artist_type entities</em>.'

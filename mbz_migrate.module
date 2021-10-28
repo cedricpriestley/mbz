@@ -1,0 +1,124 @@
+<?php
+
+/**
+ * @file
+ * Contains mbz_migrate.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function mbz_migrate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the mbz_migrate module.
+  case 'help.page.mbz_migrate':
+    $output = '';
+    $output .= '<h3>' . t('About') . '</h3>';
+    $output .= '<p>' . t('A module to migrate MusicBrainz content to Drupal') . '</p>';
+    return $output;
+
+  default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function mbz_migrate_theme() {
+  return [
+    'atist_import_block' =>
+    [
+      'variables' => [
+      ],
+      'template' => 'artist-import-block',
+      'render element' => 'children',
+    ]
+  ];
+}
+
+function mbz_migrate_artist_search($artist_name) {
+  $client = \Drupal::httpClient();
+
+  $url = 'https://musicbrainz.org/ws/2/artist/?fmt=json&query=' . $artist_name;
+
+  $response = $client->request('GET', $url, []);
+  $code = $response->getStatusCode();
+  $data = [];
+
+  if ($code == 200) {
+    $data = json_decode($response->getBody(), true);
+    return $data;
+  }
+}
+
+function mbz_migrate_artist_lookup($mbid) {
+  $client = \Drupal::httpClient();
+  /* $url = 'http://musicbrainz.org/ws/2/artist/' . $mbid . '?inc=aliases+tags+artist-rels+label-rels+url-rels+tags&fmt=json'; */
+  $url = 'http://localhost:8887/' . $mbid . '.json';
+  /* $url = 'http://musicbrainz.org/ws/2/artist/f27ec8db-af05-4f36-916e-3d57f91ecf5e?inc=aliases+tags+artist-rels+label-rels+url-rels+tags&fmt=json'; */
+  /* echo $url; */
+  $response = $client->request('GET', $url, []);
+  $code = $response->getStatusCode();
+  $data = [];
+
+  if ($code == 200) {
+    $data = json_decode($response->getBody(), true);
+    return $data;
+  }
+}
+
+function mbz_migrate_gender_id_get($name) {
+  $database = \Drupal::database();
+  $query = $database->query("SELECT id FROM {gender} WHERE name = :name", [
+    ':name' => $name,
+  ]);
+
+  $result = $query->fetchAll();
+  return $result[0]->id;
+}
+
+function mbz_migrate_artist_type_id_get($name) {
+  $database = \Drupal::database();
+  $query = $database->query("SELECT id FROM {artist_type} WHERE name = :name", [
+    ':name' => $name,
+  ]);
+
+  $result = $query->fetchAll();
+  return $result[0]->id;
+}
+
+
+/* function fetchArtist(array $form, \Drupal\Core\Form\FormStateInterface $form_state) { */
+
+/* $response = new AjaxResponse(); */
+
+/* return $response; */
+/* } */
+/**
+ * Implements hook_form_alter() for node form.
+ */
+//function mbz_migrate_form_alter(&$form, $form_state, $form_id) {
+  /*
+  if ($form_id !== "artist_add_form") {
+    return;
+  }
+  if ($form_state->getFormObject()->getEntity()->getType() != 'YOUR CONTENT TYPE') {
+    return;
+  }
+$form['actions']['import'] = array(
+  '#type' => 'submit',
+  '#weight' => 10001,
+  '#submit' => array('import_artist_submit'),
+  '#value' => t('Import'),
+);
+   */
+//}
+
+/*
+function import_artist_submit(array &$form, FormStateInterface $form_state) {
+  //print_r($form);exit;
+  print_r($form);exit;
+}
+ */

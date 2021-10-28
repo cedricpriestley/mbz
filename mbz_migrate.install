@@ -1,0 +1,171 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Site\Settings;
+
+use Drupal\mbz_migrate\Entity\ArtistType;
+use Drupal\mbz_migrate\Entity\Gender;
+/**
+ * Implements hook_uninstall()
+ */
+function mbz_migrate_uninstall() {
+  //album_primary_type_uninstall();
+  //\Drupal::database()->schema()->dropTable('area_type');
+  //\Drupal::database()->schema()->dropTable('album');
+  //\Drupal::database()->schema()->dropTable('album_type');
+  \Drupal::database()->schema()->dropTable('artist');
+  \Drupal::database()->schema()->dropTable('artist_type');
+  \Drupal::database()->schema()->dropTable('gender');
+  //\Drupal::database()->schema()->dropTable('country');
+  //\Drupal::database()->schema()->dropTable('event_type');
+  //\Drupal::database()->schema()->dropTable('instrument_type');
+  //\Drupal::database()->schema()->dropTable('label_type');
+  //\Drupal::database()->schema()->dropTab3le('place_type');
+}
+
+/**
+ * Import Primary Album Type data
+ */
+function install_album_type_primary() {
+
+  $vocabulary = Vocabulary::load('album_type_primary');
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('mbz_migrate')->getPath();
+  if (empty($vocabulary)) {
+    // Obtain configuration from yaml files.
+    $config_path = $module_path . '/config';
+    $config_storage = new FileStorage($config_path);
+
+    $default_config_path = Settings::get('config_sync_directory', FALSE);
+    $default_config_storage = new FileStorage($default_config_path);
+
+    // Obtain the storage manager for vocabularies.
+    // Create a new vocabulary from the yaml configuration and save.
+    $taxonomy_vocabulary_config = $default_config_storage->read('taxonomy.album_type_primary');
+    if (empty($taxonomy_vocabulary_config)) {
+      // If config-sync not available then read module's config for vocabulary.
+      $taxonomy_vocabulary_config = $config_storage->read('taxonomy.vocabulary.album_type_primary');
+    }
+
+    \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary')
+      ->create($taxonomy_vocabulary_config)
+      ->save();
+
+    $config_field_items = [
+      'core.entity_form_display.taxonomy_term.album_type_primary.default',
+      'core.entity_view_display.taxonomy_term.album_type_primary.default',
+      'field.field.taxonomy_term.album_type_primary.field_album_type_primary_mbid',
+      'field.storage.taxonomy_term.field_album_type_primary_mbid',
+      'taxonomy.vocabulary.album_type_primary'
+    ];
+
+    foreach ($config_field_items as $config_name) {
+      $config_record = $default_config_storage->read($config_name);
+      if (empty($config_record)) {
+        // If config-sync not available then read module's config for field.
+        $config_record = $config_storage->read($config_name);
+      }
+
+      $entity_type = \Drupal::service('config.manager')->getEntityTypeIdByName($config_name);
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
+      $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
+      $entity = $storage->createFromStorageRecord($config_record);
+      $entity->save();
+    }
+  }
+  
+  $album_data = $module_path . '/data/album_type_primary';
+  if (($handle = fopen($album_data, "r")) !== FALSE) {
+    $data = [];
+    while (($data = fgetcsv($handle, 0, "\t")) !== FALSE) {
+      if (empty($data[0])) {
+        // Skip if empty row.
+        continue;
+      }
+      else {
+        // Create  new term.
+        $term_data = [
+          'vid' => 'album_type_primary',
+          'name' => isset($data[1]) ? $data[1] : '',
+          //status' => isset($data[6]) ? $data[6] : '',
+          'path' => '/album-type-primary/' . strtolower($data[1]),
+          'field_album_type_primary_mbid' => $data[5]
+        ];
+        $term = Term::create($term_data);
+        $term->enforceIsNew();
+        $term->save();
+      }
+    }
+  }
+}
+
+function album_primary_type_uninstall() {
+
+  //drush entity:delete taxonomy_term --bundle=album_type_primary
+
+  $vids = [
+    'album_type_primary',
+  ];
+
+  // Delete 'album_primary_type' taxonomy.
+  foreach ($vids as $vid) {
+    $vocabulary = Vocabulary::load($vid);
+    if (!empty($vocabulary)) {
+      $vocabulary->delete();
+    }
+  }
+}
+
+/**
+ * Implements hook_install()
+ */
+function mbz_migrate_install() {
+
+  //install_album_type_primary();
+
+  $connection = \Drupal\Core\Database\Database::getConnection();
+
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('mbz_migrate')->getPath();
+
+  $artist_type_data = $module_path . '/data/artist_type';
+
+  if (($handle = fopen($artist_type_data, "r")) !== FALSE) {
+    $data = [];
+    while (($data = fgetcsv($handle, 0, "\t")) !== FALSE) {
+      if (empty($data[0])) {
+        continue;
+      }
+      else {
+        // Create new artist type.
+        $artist_type = ArtistType::create([
+          'type'  => 'artist_type',
+          'name' => $data[1],
+          'description' => $data[4]]);
+
+        $artist_type->save();
+      }
+    }
+  }
+
+  $gender_data = $module_path . '/data/gender';
+
+  if (($handle = fopen($gender_data, "r")) !== FALSE) {
+    $data = [];
+    while (($data = fgetcsv($handle, 0, "\t")) !== FALSE) {
+      if (empty($data[0])) {
+        continue;
+      }
+      else {
+        // Create  new gender.
+        $gender = Gender::create([
+          'type'  => 'gender',
+          'name' => $data[1]]);
+
+        $gender->save();
+      }
+    }
+  }
+}
